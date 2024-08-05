@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+}
+
+.main{
+    height: 20vh;
+    width: 100%;
+    background-color: #D9D9D9;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.content{
+    font-size: 18px;
+    font-weight: 400;
+    color: #3A3A3A;
+    margin-bottom: 20px;
+}
+
+/* Styles for small devices */
+@media (max-width: 576px) {
+    .content{
+        font-size: 12px;
+        font-weight: 200;
+    }
+}
+
+/* Styles for big devices */
+@media (min-width: 577px) and (max-width: 768px) {
+    .content{
+        font-size: 15px;
+        font-weight: 300;
+    }
+  }
+
+  /* Styles for tablet */
+  @media (min-width: 769px) and (max-width: 1200px) {
+    .content{
+        font-size: 18px;
+        font-weight: 300;
+    }
+  }
+  
+  
+

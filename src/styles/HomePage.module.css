@@ -1,0 +1,296 @@
+.mainHome {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.Homecontainer{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.mainTitle{
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line1{
+    background-color: #000000;
+    height: 5px;
+    width: 33%
+}
+
+.head1{
+    font-size: 25px;
+    font-weight: 700;
+    color: #000000;
+    margin-left: 5%;
+    margin-right: 5%;
+    word-spacing: 2rem;
+}
+
+.cardContainer {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+.card1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    transition: transform 2s ease-in-out;
+    height: 100%;
+
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+}
+
+.blogContent{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.date {
+    background-color: #ffffffcc;
+    padding: 8px 10px;
+    position: absolute;
+}
+
+.cardText {
+    position: absolute;
+    font-size: 25px;
+    background: #6e6c6c6e;
+    padding: 20px;
+    color: #333;
+    top: 350px;
+    width: 60%;
+    left: 20%;
+    color: #FFFFFF;
+}
+
+.postButton {
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    position: absolute;
+    top: 520px;
+    left: 45%;
+    transition: all ease 0.5s;
+}
+
+.postButton:hover{
+    background-color: #8d44ad98;
+    padding: 9px 19px;
+    font-size: 0.9em;
+}
+
+
+.blogsContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainTitle1{
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: last baseline;
+}
+
+.line2{
+    width: 25%;
+    height: 4px;
+    background-color: #333;
+}
+
+.head2{
+    font-size: 22px;
+    word-spacing: 8px;
+    font-weight: 800;
+    color: #333;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 22%;
+  grid-row-gap: 50px;
+  margin: 25px auto;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  width: 100%;
+}
+
+.cards .card {
+  width: 400px;
+  height: auto;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.cards .card img {
+  width: 100%;
+  height: 100%;
+}
+
+.cards .card .article {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.cards .card .article h4 {
+  font-size: 20px;
+  color: #4a4a4a;
+  font-weight: 700;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.cards .card .article p {
+  font-size: 14px;
+  color: #6a6a6a;
+  margin-top: 2px;
+  width: 100%;
+}
+
+.article .button {
+  text-decoration: none;
+  margin-top: 10px;
+  color: #CA9856;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.cards .card .postedDate p {
+  font-weight: 600;
+  position: absolute;
+  font-size: 14px;
+  top: 0;
+  left: 0;
+  background-color: #ffffff8e;
+  padding: 8px;
+}
+
+.showMoreIcon{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+}
+
+.showMoreIcon a{
+    font-size: 20px;
+    text-decoration: none;
+    margin-right: 10px;
+    color: #CA9856;
+}
+
+.GrLinkNext{
+    font-size: 20px;
+    color: #CA9856;
+} 
+
+
+
+
+/* Styles for extra small devices */
+@media (max-width: 450px) {
+    .mainTitle{
+        height: 10vh;
+        width: 95%;
+    }
+    .line1{
+        height: 2px;
+        width: 15%
+    }
+    
+    .head1{
+        font-size: 12px;
+        word-spacing: 0px;
+    }
+}
+
+/* Styles for small devices */
+@media (min-width: 450px) and (max-width: 768px) {
+    .mainTitle{
+        height: 15vh;
+        width: 90%;
+    }
+    .line1{
+        height: 3px;
+        width: 20%
+    }
+    
+    .head1{
+        font-size: 14px;
+        word-spacing: 0px;
+    }
+}
+
+/* Styles for big devices */
+@media (min-width: 768px) and (max-width: 1000px) {
+    .mainTitle{
+        height: 18vh;
+        width: 85%;
+    }
+    .line1{
+        height: 4px;
+        width: 25%
+    }
+    
+    .head1{
+        font-size: 20px;
+        word-spacing: 5px;
+    }
+  }
+
+  /* Styles for tablet */
+  @media (min-width: 1000px) and (max-width: 1400px) {
+    .mainTitle{
+        height: 22vh;
+        width: 80%;
+    }
+
+    .line1{
+        height: 4px;
+        width: 30%
+    }
+    
+    .head1{
+        font-size: 22px;
+        word-spacing: 0px;
+    }
+  }
