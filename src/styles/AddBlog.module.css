@@ -94,95 +94,41 @@
     align-self: center;
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 22%;
-    grid-row-gap: 50px;
-    margin: 25px auto;
-    margin-top: 80px;
-    margin-bottom: 80px;
-    width: 100%;
-  }
   
-  .cards .card {
-    width: 400px;
-    height: auto;
-    background-color: #FFFFFF;
-    position: relative;
-  }
-  
-  .cards .card img {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .cards .card .article {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-  }
-  
-  .cards .card .article h4 {
-    font-size: 20px;
-    color: #4a4a4a;
-    font-weight: 700;
-    margin-top: 15px;
-    width: 100%;
-  }
-  
-  .cards .card .article p {
-    font-size: 14px;
-    color: #6a6a6a;
-    margin-top: 2px;
-    width: 100%;
-  }
-  
-  .article .button {
-    text-decoration: none;
-    margin-top: 10px;
-    color: #CA9856;
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-  
-  .cards .card .postedDate p {
-    font-weight: 600;
-    position: absolute;
-    font-size: 14px;
-    top: 0;
-    left: 0;
-    background-color: #ffffff8e;
-    padding: 8px;
-  }
-
-
-.paginationContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .table th,
+  .table td {
     padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
   }
   
-  .arrowButton {
-    background: none;
-    border: none;
-    color: #c85d44;
-    font-size: 24px;
-    cursor: pointer;
+  .table th {
+    background-color: #f4f4f4;
+  }
+  
+  .tableImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .editButton,
+  .deleteButton {
     padding: 5px 10px;
-    margin: 0 5px;
+    margin-right: 5px;
+    cursor: pointer;
   }
   
-  .pageButton {
-    background: none;
-    border: 1px solid #000;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 5px 15px;
-    margin: 0 5px;
+  .editButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
   }
- 
+  
+  .deleteButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+  }
+  
   

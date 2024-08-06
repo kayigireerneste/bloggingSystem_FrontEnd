@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import HomeCSS from '../styles/HomePage.module.css';
 import image1 from '../images/image1.png';
 import image2 from '../images/image2.png';
 import image3 from '../images/image3.png';
 import { GrLinkNext } from "react-icons/gr";
-import AddBlog from './AddBlog';
-import SingleBlog from './SingleBlog';
 
 export default function HomePage() {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -28,10 +27,9 @@ export default function HomePage() {
     }
   ];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const nextSlide = useCallback(() => {
     setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
-  });
+  }, [slides.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,7 +56,9 @@ export default function HomePage() {
             <div className={HomeCSS.blogContent}>
                 <div className={HomeCSS.date}>{slides[slideIndex].date}</div>
                 <h2 className={HomeCSS.cardText}>{slides[slideIndex].text}</h2>
-                <button className={HomeCSS.postButton}>POST BLOG</button>
+                <Link to="/addBlog">
+                  <button className={HomeCSS.postButton}>POST BLOG</button>
+                </Link>
             </div>
             <img src={slides[slideIndex].image} alt="images" className={HomeCSS.cardImage} />
           </div>
@@ -72,83 +72,35 @@ export default function HomePage() {
           </div>
 
           <div className={HomeCSS.cards}>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
+            {[1, 2, 3, 4].map((_, idx) => (
+              <div key={idx} className={HomeCSS.card}>
+                <div className={HomeCSS.imgSections}>
+                  <img src={image1} alt="Blog" />
+                </div>
+                <div className={HomeCSS.article}>
+                  <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua.....
+                  </p>
+                  <Link to="/singleBlog" className={HomeCSS.button}>Read More</Link>
+                </div>
+                <div className={HomeCSS.postedDate}>
+                  <p>August 03, 2024</p>
+                </div>
               </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href='' className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
-              </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
-              </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
-              </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
+            ))}
           </div>
+
           <div className={HomeCSS.showMoreIcon}>
-            <a href="#">show more</a>
-            <GrLinkNext className={HomeCSS.GrLinkNext}/>
+            <Link to="/latestBlog">
+              <a>show more</a>
+            </Link>
+            <Link to="/oldBlog">
+               <GrLinkNext className={HomeCSS.GrLinkNext}/>
+            </Link>
           </div>
         </div>
-
-
-
 
         <div className={HomeCSS.blogsContainer}>
           <div className={HomeCSS.mainTitle1}>
@@ -158,87 +110,35 @@ export default function HomePage() {
           </div>
 
           <div className={HomeCSS.cards}>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
+            {[1, 2, 3, 4].map((_, idx) => (
+              <div key={idx} className={HomeCSS.card}>
+                <div className={HomeCSS.imgSections}>
+                  <img src={image1} alt="Blog" />
+                </div>
+                <div className={HomeCSS.article}>
+                  <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua.....
+                  </p>
+                  <Link to="/singleBlog" className={HomeCSS.button}>Read More</Link>
+                </div>
+                <div className={HomeCSS.postedDate}>
+                  <p>August 03, 2024</p>
+                </div>
               </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
-              </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
-              </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
-
-            <div className={HomeCSS.card}>
-              <div className={HomeCSS.imgSections}>
-                <img src={image1} />
-              </div>
-              <div className={HomeCSS.article}>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.....
-                </p>
-                <a href="" className={HomeCSS.button}>Read More</a>
-              </div>
-              <div className={HomeCSS.postedDate}>
-                <p>August 03, 2024</p>
-              </div>
-            </div>
+            ))}
           </div>
+
           <div className={HomeCSS.showMoreIcon}>
-            <a href="#">show more</a>
-            <GrLinkNext className={HomeCSS.GrLinkNext}/>
+            <Link to="/oldBlog">
+              <a>show more</a>
+            </Link>
+            <Link to="/oldBlog">
+               <GrLinkNext className={HomeCSS.GrLinkNext}/>
+            </Link>
           </div>
         </div>
-
-
-
-
-
-
-
       </div>
     </div>
   );
