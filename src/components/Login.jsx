@@ -10,7 +10,7 @@ import imageLogin from "../images/imageLogin.png";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -30,10 +30,9 @@ const Login = () => {
       });
 
       if (response.data && response.data.data && response.data.data.token) {
-        // Store the token in local storage or handle it as needed
         localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("username", response.data.user)
 
-        // Show success notification
         toast.success("Login successful!");
 
         // Navigate to the home page or dashboard after successful login
@@ -86,7 +85,7 @@ const Login = () => {
             </Link>
             <p>
               Don`t have an account?{" "}
-              <Link to="/regist" className={LoginCSS.registerLink}>
+              <Link to="/register" className={LoginCSS.registerLink}>
                 Register here
               </Link>
             </p>

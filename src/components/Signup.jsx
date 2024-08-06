@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -21,24 +21,36 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const validateForm = () => {
+    if (!formData.names.trim()) {
+      toast.error("Please enter your full name");
+      return false;
+    }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return false;
+    }
+    if (formData.password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      return false;
+    }
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
-      return;
+      return false;
     }
+    return true;
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
     setLoading(true);
-
     try {
       const payload = {
         names: formData.names,
         email: formData.email,
         password: formData.password
       };
-      console.log('Payload:', payload);
-
       const response = await axios.post(
         "https://qt-testbackend.onrender.com/api/users/signup",
         payload,
@@ -48,28 +60,29 @@ const Signup = () => {
           }
         }
       );
-
-      console.log('Response:', response);
-
-      if (response.data && response.data.data && response.data.data.token) {
-        localStorage.setItem("token", response.data.data.token);
-        toast.success("Sign up successful!");
-        navigate("/login");
+      console.log('Server response:', response.data); // Log the entire response for debugging
+      if (response.data && response.data.status === 'success') {
+        if (response.data.data && response.data.data.token) {
+          localStorage.setItem("token", response.data.data.token);
+          toast.success("Sign up successful!");
+          navigate("/login");
+        } else {
+          console.warn('Token not found in the response');
+          toast.success("Sign up successful! Please log in.");
+          navigate("/login");
+        }
       } else {
-        toast.error("Sign up failed, try again");
+        throw new Error(response.data.message || "Unexpected response from server");
       }
     } catch (err) {
-      console.error('Error object:', err);
+      console.error('Signup error:', err);
       if (err.response) {
-        console.error('Error data:', err.response.data);
-        console.error('Error status:', err.response.status);
-        console.error('Error headers:', err.response.headers);
+        toast.error(err.response.data.message || "Sign up failed. Please try again.");
       } else if (err.request) {
-        console.error('Error request:', err.request);
+        toast.error("No response from server. Please check your internet connection.");
       } else {
-        console.error('Error message:', err.message);
+        toast.error(err.message || "An unexpected error occurred. Please try again.");
       }
-      toast.error(err.response?.data?.message || "Sign up failed, try again");
     } finally {
       setLoading(false);
     }
@@ -93,6 +106,7 @@ const Signup = () => {
               value={formData.names}
               onChange={handleChange}
               required
+              disabled={loading}
             />
             <input
               type="email"
@@ -102,15 +116,18 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              disabled={loading}
             />
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Password (min 8 characters)"
               className={SignupCSS.input}
               value={formData.password}
               onChange={handleChange}
               required
+              disabled={loading}
+              minLength={8}
             />
             <input
               type="password"
@@ -120,6 +137,7 @@ const Signup = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
+              disabled={loading}
             />
             <button type="submit" className={SignupCSS.SignupButton} disabled={loading}>
               {loading ? "Signing up..." : "Sign Up"}
