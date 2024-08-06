@@ -56,7 +56,6 @@ const Login = () => {
           <img src={imageLogin} alt="Login" className={LoginCSS.image} />
         </div>
         <div className={LoginCSS.rightPane}>
-          <button className={LoginCSS.backButton} onClick={() => navigate(-1)}>← back</button>
           <h2 className={LoginCSS.signInTitle}>Sign into your account</h2>
           <form className={LoginCSS.form} onSubmit={handleSubmit}>
             <input

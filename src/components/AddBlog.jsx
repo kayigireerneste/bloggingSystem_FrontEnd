@@ -7,7 +7,6 @@ const AddBlog = () => {
   return (
     <div className={AddBlogCSS.container}>
       <div className={AddBlogCSS.addContainer}>
-        <button className={AddBlogCSS.backButton}>← back home</button>
         <h2 className={AddBlogCSS.title}>New Blog / News</h2>
         <form className={AddBlogCSS.form}>
           <input type="file" className={AddBlogCSS.input} />

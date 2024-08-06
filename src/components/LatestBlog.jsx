@@ -6,9 +6,6 @@ export default function LatestBlog() {
   return (
     <div className={LatestBlogCSS.mainHome}>
       <div className={LatestBlogCSS.Homecontainer}>
-        <a href="#" className={LatestBlogCSS.backLink}>
-            &larr; back
-        </a>
         <div className={LatestBlogCSS.blogsContainer}>
           <div className={LatestBlogCSS.mainTitle1}>
             <hr className={LatestBlogCSS.line2} />

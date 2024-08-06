@@ -78,6 +78,7 @@ export default function HomePage() {
                   <img src={image1} alt="Blog" />
                 </div>
                 <div className={HomeCSS.article}>
+                  <h6 className={HomeCSS.autho}>eric mugabe</h6>
                   <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -116,6 +117,7 @@ export default function HomePage() {
                   <img src={image1} alt="Blog" />
                 </div>
                 <div className={HomeCSS.article}>
+                  <h6 className={HomeCSS.autho}>eric mugabe</h6>
                   <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do

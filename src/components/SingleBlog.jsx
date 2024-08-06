@@ -6,9 +6,6 @@ import image from "../images/image1.png";
 const SingleBlog = () => {
   return (
     <div className={SingleBlogCSS.container}>
-      <a href="#" className={SingleBlogCSS.backLink}>
-        &larr; back
-      </a>
       <img src={image} alt="Blog Post" className={SingleBlogCSS.image} />
       <h2 className={SingleBlogCSS.title}>
         Lorem ipsum dosectetur adipisicing elit, sed do. <h6>July 22, 2024</h6>

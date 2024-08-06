@@ -8,9 +8,6 @@ export default function OldBlog() {
   return (
     <div className={OldBlogCSS.mainHome}>
       <div className={OldBlogCSS.Homecontainer}>
-        <a href="#" className={OldBlogCSS.backLink}>
-            &larr; back
-        </a>
         <div className={OldBlogCSS.blogsContainer}>
           <div className={OldBlogCSS.mainTitle1}>
               <hr className={OldBlogCSS.line2}/>

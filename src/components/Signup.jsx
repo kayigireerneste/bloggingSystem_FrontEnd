@@ -32,25 +32,43 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://qt-testbackend.onrender.com/api/users/signup", {
+      const payload = {
         names: formData.names,
         email: formData.email,
         password: formData.password
-      });
+      };
+      console.log('Payload:', payload);
+
+      const response = await axios.post(
+        "https://qt-testbackend.onrender.com/api/users/signup",
+        payload,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+      );
+
+      console.log('Response:', response);
 
       if (response.data && response.data.data && response.data.data.token) {
-        // Store the token in local storage or handle it as needed
         localStorage.setItem("token", response.data.data.token);
-
-        // Show success notification
         toast.success("Sign up successful!");
-
-        // Navigate to the login page after successful signup
         navigate("/login");
       } else {
         toast.error("Sign up failed, try again");
       }
     } catch (err) {
+      console.error('Error object:', err);
+      if (err.response) {
+        console.error('Error data:', err.response.data);
+        console.error('Error status:', err.response.status);
+        console.error('Error headers:', err.response.headers);
+      } else if (err.request) {
+        console.error('Error request:', err.request);
+      } else {
+        console.error('Error message:', err.message);
+      }
       toast.error(err.response?.data?.message || "Sign up failed, try again");
     } finally {
       setLoading(false);
@@ -65,7 +83,6 @@ const Signup = () => {
           <img src={imageSignup} alt="Signup" className={SignupCSS.image} />
         </div>
         <div className={SignupCSS.rightPane}>
-          <button className={SignupCSS.backButton} onClick={() => navigate(-1)}>← back</button>
           <h2 className={SignupCSS.signupTitle}>Sign Up for an Account</h2>
           <form className={SignupCSS.form} onSubmit={handleSubmit}>
             <input
