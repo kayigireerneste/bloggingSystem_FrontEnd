@@ -48,10 +48,10 @@ const Signup = () => {
         // Navigate to the login page after successful signup
         navigate("/login");
       } else {
-        toast.error("Sign up failed");
+        toast.error("Sign up failed, try again");
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "Sign up failed");
+      toast.error(err.response?.data?.message || "Sign up failed, try again");
     } finally {
       setLoading(false);
     }
@@ -66,7 +66,7 @@ const Signup = () => {
         </div>
         <div className={SignupCSS.rightPane}>
           <button className={SignupCSS.backButton} onClick={() => navigate(-1)}>← back</button>
-          <h2 className={SignupCSS.signupTitle}>SignUp your account</h2>
+          <h2 className={SignupCSS.signupTitle}>Sign Up for an Account</h2>
           <form className={SignupCSS.form} onSubmit={handleSubmit}>
             <input
               type="text"
@@ -105,7 +105,7 @@ const Signup = () => {
               required
             />
             <button type="submit" className={SignupCSS.SignupButton} disabled={loading}>
-              {loading ? "Signing up..." : "Signup"}
+              {loading ? "Signing up..." : "Sign Up"}
             </button>
           </form>
           <div className={SignupCSS.links}>
@@ -118,7 +118,7 @@ const Signup = () => {
           </div>
           <div className={SignupCSS.terms}>
             <a href="/terms-of-use">Terms of Use</a>.{" "}
-            <a href="/privacy-policy">Privacy policy</a>
+            <a href="/privacy-policy">Privacy Policy</a>
           </div>
         </div>
       </div>

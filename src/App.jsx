@@ -10,12 +10,14 @@ import SingleBlog from './components/SingleBlog';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import AddBlog from './components/AddBlog';
+import NavBar from './components/NavBar';
 
 function App() {
 
   const Layout = () => {
     return(
       <>
+        <NavBar/>
         <Outlet/>
         <Footer/>
       </>

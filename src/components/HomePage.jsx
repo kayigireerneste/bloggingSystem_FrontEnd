@@ -56,7 +56,7 @@ export default function HomePage() {
             <div className={HomeCSS.blogContent}>
                 <div className={HomeCSS.date}>{slides[slideIndex].date}</div>
                 <h2 className={HomeCSS.cardText}>{slides[slideIndex].text}</h2>
-                <Link to="/addBlog">
+                <Link to="/login">
                   <button className={HomeCSS.postButton}>POST BLOG</button>
                 </Link>
             </div>

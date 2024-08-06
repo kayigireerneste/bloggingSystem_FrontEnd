@@ -6,11 +6,12 @@
     height: 80vh;
     width: 100%;
     background-color: #f5e1f4;
+    
   }
 
   .PaneContainer{
-    width: 60%;
-    height: 90%;
+    width: 55%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
