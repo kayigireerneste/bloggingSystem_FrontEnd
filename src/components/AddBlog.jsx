@@ -11,7 +11,7 @@ const AddBlog = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [blogs, setBlogs] = useState([]); // Initialize as an empty array
+  const [blogs, setBlogs] = useState([]);
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -44,11 +44,9 @@ const AddBlog = () => {
       console.log('Response:', response);
       if (response.data) {
         toast.success("Blog post created successfully!");
-        // Optionally, clear the form
         setTitle("");
         setDescription("");
         setImage(null);
-        // Fetch the updated list of blogs
         fetchBlogs();
       } else {
         toast.error("Failed to create blog post. Please try again.");
@@ -63,7 +61,11 @@ const AddBlog = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get("https://qt-testbackend.onrender.com/api/blogs");
+      const response = await axios.get("https://qt-testbackend.onrender.com/api/blogs", {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      });
       setBlogs(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
       console.error('Error fetching blogs:', err);
