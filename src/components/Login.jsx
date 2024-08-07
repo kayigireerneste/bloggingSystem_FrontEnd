@@ -31,8 +31,6 @@ const Login = () => {
 
       if (response.data && response.data.data && response.data.data.token) {
         localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("username", response.data.user)
-
         toast.success("Login successful!");
 
         // Navigate to the home page or dashboard after successful login

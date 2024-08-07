@@ -8,83 +8,82 @@ import SignupCSS from "../styles/Signup.module.css";
 import imageSignup from "../images/imageSignUp.png";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    names: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [names, setNames] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [namesError, setNamesError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const validateForm = () => {
-    if (!formData.names.trim()) {
-      toast.error("Please enter your full name");
-      return false;
-    }
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      toast.error("Please enter a valid email address");
-      return false;
-    }
-    if (formData.password.length < 8) {
-      toast.error("Password must be at least 8 characters long");
-      return false;
-    }
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match");
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
-    setLoading(true);
-    try {
-      const payload = {
-        names: formData.names,
-        email: formData.email,
-        password: formData.password
-      };
-      const response = await axios.post(
-        "https://qt-testbackend.onrender.com/api/users/signup",
-        payload,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        }
-      );
-      console.log('Server response:', response.data); // Log the entire response for debugging
-      if (response.data && response.data.status === 'success') {
-        if (response.data.data && response.data.data.token) {
-          localStorage.setItem("token", response.data.data.token);
-          toast.success("Sign up successful!");
-          navigate("/login");
-        } else {
-          console.warn('Token not found in the response');
-          toast.success("Sign up successful! Please log in.");
-          navigate("/login");
-        }
-      } else {
-        throw new Error(response.data.message || "Unexpected response from server");
+    setIsLoading(true);
+    axios({
+      method: "POST",
+      url: "https://qt-testbackend.onrender.com/api/users/signup",
+      data: {
+        names: names,
+        email: email,
+        password: password,
+      },
+      headers: {
+        'Content-Type': 'application/json',
       }
-    } catch (err) {
-      console.error('Signup error:', err);
-      if (err.response) {
-        toast.error(err.response.data.message || "Sign up failed. Please try again.");
-      } else if (err.request) {
-        toast.error("No response from server. Please check your internet connection.");
-      } else {
-        toast.error(err.message || "An unexpected error occurred. Please try again.");
-      }
-    } finally {
-      setLoading(false);
+    })
+      .then((response) => {
+        toast.success(response.data.message || "Sign up successful!");
+        setIsLoading(false);
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast.error(error.response?.data?.message || "Sign up failed. Please try again.");
+      });
+  };
+
+  const validateForm = (e) => {
+    e.preventDefault();
+    let valid = true;
+    const isValidEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+    if (!names.trim()) {
+      setNamesError("Please enter your full name");
+      valid = false;
+    } else {
+      setNamesError("");
+    }
+    if (!isValidEmail.test(email)) {
+      setEmailError("Please enter a valid email address");
+      valid = false;
+    } else {
+      setEmailError("");
+    }
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long");
+      valid = false;
+    } else if (password.indexOf(" ") >= 0) {
+      setPasswordError("Password can't contain space");
+      valid = false;
+    } else {
+      setPasswordError("");
+    }
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
+      valid = false;
+    } else {
+      setConfirmPasswordError("");
+    }
+
+    if (valid) {
+      handleSignup(e);
+    } else {
+      setIsLoading(false);
     }
   };
 
@@ -97,50 +96,49 @@ const Signup = () => {
         </div>
         <div className={SignupCSS.rightPane}>
           <h2 className={SignupCSS.signupTitle}>Sign Up for an Account</h2>
-          <form className={SignupCSS.form} onSubmit={handleSubmit}>
+          <form className={SignupCSS.form} onSubmit={validateForm}>
+            <p style={{ fontSize: 10, color: "red" }}>{namesError}</p>
             <input
               type="text"
               name="names"
               placeholder="Full Name"
               className={SignupCSS.input}
-              value={formData.names}
-              onChange={handleChange}
-              required
-              disabled={loading}
+              value={names}
+              onChange={(e) => setNames(e.target.value)}
+              disabled={isLoading}
             />
+            <p style={{ fontSize: 10, color: "red" }}>{emailError}</p>
             <input
               type="email"
               name="email"
               placeholder="Email"
               className={SignupCSS.input}
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={loading}
-            />
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isLoading}
+            />  
+            <p style={{ fontSize: 10, color: "red" }}>{passwordError}</p>
             <input
               type="password"
               name="password"
-              placeholder="Password (min 8 characters)"
+              placeholder="Password (min 6 characters)"
               className={SignupCSS.input}
-              value={formData.password}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              minLength={8}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
             />
+            <p style={{ fontSize: 10, color: "red" }}>{confirmPasswordError}</p>
             <input
               type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
               className={SignupCSS.input}
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              disabled={loading}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              disabled={isLoading}
             />
-            <button type="submit" className={SignupCSS.SignupButton} disabled={loading}>
-              {loading ? "Signing up..." : "Sign Up"}
+            <button type="submit" className={SignupCSS.SignupButton} disabled={isLoading}>
+              {isLoading ? "Signing up..." : "Sign Up"}
             </button>
           </form>
           <div className={SignupCSS.links}>
