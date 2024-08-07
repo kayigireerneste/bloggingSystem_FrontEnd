@@ -85,7 +85,7 @@ const Login = () => {
             </Link>
             <p>
               Don`t have an account?{" "}
-              <Link to="/register" className={LoginCSS.registerLink}>
+              <Link to="/regist" className={LoginCSS.registerLink}>
                 Register here
               </Link>
             </p>
